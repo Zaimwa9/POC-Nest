@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { UsersDatabaseService } from '../database/users.database.service'; // Import UsersDatabaseService
 
 // This should be a real class/interface representing a user entity
 export type User = {
@@ -10,6 +11,8 @@ export type User = {
 
 @Injectable()
 export class UsersService {
+  constructor(private readonly usersDatabaseService: UsersDatabaseService) {}
+
   private readonly users = [
     {
       userId: 1,
@@ -29,6 +32,11 @@ export class UsersService {
     username: string,
     password: string,
   ): Promise<User | undefined> {
+    try {
+      await this.usersDatabaseService.testModule();
+    } catch (e) {
+      console.log(e);
+    }
     return this.users.find(
       (user) => user.username === username && password === user.password,
     );
