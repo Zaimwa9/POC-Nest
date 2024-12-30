@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { UsersDatabaseService } from '../database/users.database.service'; // Import UsersDatabaseService
+import { CountriesDatabaseService } from '../database/countries.database.service'; // Import UsersDatabaseService
 
 // This should be a real class/interface representing a user entity
 export type User = {
@@ -11,7 +11,9 @@ export type User = {
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly usersDatabaseService: UsersDatabaseService) {}
+  constructor(
+    private readonly usersDatabaseService: CountriesDatabaseService,
+  ) {}
 
   private readonly users = [
     {

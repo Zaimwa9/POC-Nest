@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import Knex from 'knex';
-import { UsersDatabaseService } from './users.database.service';
+import { CountriesDatabaseService } from './countries.database.service';
 
 @Module({
   providers: [
@@ -8,9 +8,9 @@ import { UsersDatabaseService } from './users.database.service';
       provide: 'KNEX_CONNECTION',
       useFactory: async () => {
         return Knex({
-          client: 'pg', // or 'mysql', 'sqlite3', etc.
+          client: 'pg',
           connection: {
-            host: 'xx',
+            host: 'localhost',
             user: 'xx',
             password: 'xx',
             database: 'xx',
@@ -19,9 +19,8 @@ import { UsersDatabaseService } from './users.database.service';
         });
       },
     },
-    UsersDatabaseService,
+    CountriesDatabaseService,
   ],
-  exports: ['KNEX_CONNECTION', UsersDatabaseService],
+  exports: ['KNEX_CONNECTION', CountriesDatabaseService],
 })
-// DATABASE_URL="postgresql://postgres:Helloworld1234@localhost:5432/nest?schema=public"
 export class DatabaseModule {}
